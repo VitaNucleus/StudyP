@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Напоминалка</title>
+</head>
+<body>
+    <div>
+        <h1>Приложение отправляющие напоминание на почты</h1>
+        <p>Приложение позволит создать сообщение, которое будет в 10:00 отправляться на указанную почту раз в день</p>
+    </div>
+    <div>
+        <form method="post">
+            <label>E-mail</label>
+            <input id="e-mail" type="email">
+            <label>Текст</label>
+            <input id="text" type="text" maxlength="210" onkeydown="this.style.width = ((this.value.length + 1) * 8.25) + 'px';">
+            <input type="submit">
+        </form>
+    </div>
+    <div>
+        <p>Приложение пооддерживает только 10 одновременных почтовых адресов</p>
+        <p>Из-за этого возможна ситуация, когда вам в какой-то момент не придёт сообщение</p>
+        <p>Ещё сообщение может не придти из-за неполадок на сервере, на которм развёрнуто это приложение</p>
+    </div>
+</body>
+</html>
