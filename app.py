@@ -15,25 +15,22 @@ def send_mail():
         json_dict = json.load(file)
 
         keys = list(json_dict.keys())
-        host_email = os.getenv('HOSTNAME')
-        host_pass = os.getenv('HOSTPASSWORD')
-        print('test')
-        with smtplib.SMTP_SSL('smtp.yandex.com') as smtp:
-            print('good')
-            smtp.login(host_email, host_pass)
-            for key in keys:
-                print('ok')
-                dest_email = json_dict[key]['e-mail']
-                subject = "Акты проверки нарушений качества теплоснабжения"
+        host_email = 'AbiturientSynergy@yandex.ru'
+        host_pass = 'qkomeaarhceuawun'
+        server = smtplib.SMTP_SSL('smtp.yandex.com', 465)
+        server.login(host_email, host_pass)
+        for key in keys:
+            dest_email = json_dict[key]['e-mail']
+            subject = "Акты проверки нарушений качества теплоснабжения"
 
-                msg = EmailMessage()
-                msg["From"] = host_email  # Прозвище, учетная запись почтового ящика отправителя
-                msg["To"] = dest_email  # Прозвище, учетная запись почтового ящика получателя
-                msg["Subject"] = subject  # Тема письма
-                msg['Text'] = json_dict[key]['text']
+            msg = EmailMessage()
+            msg["From"] = host_email  # Прозвище, учетная запись почтового ящика отправителя
+            msg["To"] = dest_email  # Прозвище, учетная запись почтового ящика получателя
+            msg["Subject"] = subject  # Тема письма
+            msg['Text'] = json_dict[key]['text']
 
-                smtp.send_message(msg)
-            smtp.quit()
+            server.send_message(msg)
+        server.quit()
 @app.route('/sended')
 def every_day():
     schedule.every().minute.do(send_mail)
